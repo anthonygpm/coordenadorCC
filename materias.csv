@@ -1,4 +1,4 @@
-codigo;nomeDisc;periodoDisc;preRequisitos;chDisc;obrigatoria;completa;horario;diaDeAula
+codigo;nomeDisc;periodo;preRequisitos;chDisc;obrigatoria;completa;horario;diaDeAula
 COMP359;Programação 1;1;-999;72;1;0;T3T6;sex
 COMP360;Lógica para Computação;1;-999;72;1;0;T3T4;segqua
 COMP361;Computação, Sociedade e Ética;1;-999;72;1;0;T5T6;segqua
