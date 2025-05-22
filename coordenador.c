@@ -17,16 +17,29 @@ As salas laboratórios devem ser alocadas preferencialmente para as disciplinas 
 */
 
 
-// O professor deve ter um limite máximo de disciplina por semestre planejado, igual a: máximo 3;
+// O professor deve ter um limite máximo de disciplina por semestre planejado, igual a: máximo 3; - FEITO
 // considere a possibilidade de solicitar um professor substituto para lecionar a disciplina;
 // os professores deve ser alocados no menor números de dias possíveis
-// as disciplinas obrigatórias devem ter maior prioridade
+// as disciplinas obrigatórias devem ter maior prioridade - FEITO
 
 /*
 Todas as disciplinas devem ser ofertadas, exceto:
 o número de alunos a serem matriculados na mesma for inferior a 10 e nenhum deles esteja em no prazo máximo de conclusão de curso;
 que o número de alunos a serem matriculados na mesma é igual a 0;
 que não existir professor capacitado a ministrar a referida disciplina (o que acontece hoje em dia com a eletiva de FPGA);
+*/
+
+/*
+PROBLEMA - nos professores, é melhor adicionar uma lista encadeada das matérias que ele pode lecionar, já que no momento, 
+está sendo limitado a ele apenas 3 matérias possíveis de lecionar.
+
+PROBLEMA - a lista de alunos está muito aleatória, com matérias meio desconexas.
+
+PROBLEMA - na contagem, ele está adicionando perfeitamente para as matérias obrigatórias, sendo que, para as metérias eletivas,
+ele está adicionando apenas naquelas que o aluno reprovou/trancou, e não nas eletivas seguintes.
+
+TODO - adicionar que se não houver professor disponível para a matéria, recomendar solicitar um professor substituto.
+TODO - adicionar o sistema de dias e horários, para não se chocarem.
 */
 
 #include <stdio.h>
@@ -67,6 +80,7 @@ typedef struct {
     char disciplinas[MAX_DISCIPLINAS][20];
     int num_disciplinas;
     int carga_horaria;
+    int disciplinas_alocadas;
 } Professor;
 
 // Estrutura de necessidade de disciplina
@@ -114,16 +128,16 @@ int read_alunos(const char *filename, Aluno alunos[], int max) {
         float media;
 
         strcpy(nome_aluno, token);
-        token = strtok(NULL, ";,\t");
+        token = strtok(NULL, ";\t");
         if (!token) continue;
         periodo = atoi(token);
-        token = strtok(NULL, ";,\t");
+        token = strtok(NULL, ";\t");
         if (!token) continue;
         strcpy(codigo, token);
-        token = strtok(NULL, ";,\t");
+        token = strtok(NULL, ";\t");
         if (!token) continue;
         strcpy(nome_disciplina, token);
-        token = strtok(NULL, ";,\t\n");
+        token = strtok(NULL, ";\t\n");
         if (!token) continue;
         media = atof(token);
 
@@ -205,6 +219,7 @@ int read_professores(const char *filename, Professor profs[], int max) {
         // Nome do professor
         strcpy(profs[count].nome_professor, token);
         profs[count].num_disciplinas = 0;
+        profs[count].disciplinas_alocadas = 0;
 
         // Processa os tokens restantes
         char *last_token = NULL;
@@ -295,9 +310,12 @@ void calcular_prioridade(NecessidadeDisciplina materias[], int n_materias,
             if (d->completa == 0) {  // Usa o status do aluno, não do arquivo
                 for (int j = 0; j < n_materias; j++) {
                     if (strcmp(materias[j].codigo, d->codigo_disciplina) == 0 &&
-                        materias[j].periodo <= alunos[i].periodo &&  // Usa o período da disciplina
-                        materias[j].obrigatoria == 1) {             // Considera apenas obrigatórias
-                        materias[j].necessidade++;
+                        materias[j].periodo <= alunos[i].periodo) { // Usa o período da disciplina 
+                        if (materias[j].obrigatoria == 1) {
+                            materias[j].necessidade += 2; // peso 2 para disciplina obrigatória
+                        } else {
+                            materias[j].necessidade++; // peso 1 para disciplina eletiva
+                        }
                         break;
                     }
                 }
@@ -323,10 +341,11 @@ int alocar_disciplinas(NecessidadeDisciplina materias[], int n_materias,
 
         int prof_index = -1, sala_index = -1;
 
-        // Encontra professor
+        // Encontra professor disponível
         for (int j = 0; j < n_profs; j++) {
             if (professor_pode(&profs[j], materias[i].codigo) && 
-                profs[j].carga_horaria > 0) {
+                profs[j].carga_horaria > 0 &&
+                profs[j].disciplinas_alocadas < 3) {  // NOVA CONDIÇÃO
                 prof_index = j;
                 break;
             }
@@ -341,18 +360,17 @@ int alocar_disciplinas(NecessidadeDisciplina materias[], int n_materias,
         }
 
         if (prof_index != -1 && sala_index != -1) {
-            // Atualiza estruturas
+            // Preenche a oferta
             strcpy(ofertas[count].codigo_disciplina, materias[i].codigo);
             strcpy(ofertas[count].nome_disciplina, materias[i].nome);
             strcpy(ofertas[count].nome_professor, profs[prof_index].nome_professor);
             strcpy(ofertas[count].nome_sala, salas[sala_index].nome_sala);
             ofertas[count].alunos_interessados = materias[i].necessidade;
 
-            // Atualiza capacidade da sala
+            // Atualiza informações
             salas[sala_index].capacidade -= materias[i].necessidade;
-
-            // Atualiza carga horária do professor
             profs[prof_index].carga_horaria--;
+            profs[prof_index].disciplinas_alocadas++;  // INCREMENTA A ALOCAÇÃO
 
             count++;
         }
@@ -424,8 +442,15 @@ int main() {
         return 1;
     }
 
+    
+    
     calcular_prioridade(materias, n_materias, alunos, n_alunos);
-
+    
+    // for (int i = 0; i < n_materias; i++) {
+    //     printf("Disciplina: %s (%s) | Obrigatória: %d | Necessidade: %d\n",
+    //         materias[i].nome, materias[i].codigo, materias[i].obrigatoria, materias[i].necessidade);
+    // }
+    
     ordenar_materias_por_necessidade(materias, n_materias);
 
     int n_ofertas = alocar_disciplinas(materias, n_materias, profs, n_profs, salas, n_salas, ofertas, MAX_DISCIPLINAS);
@@ -435,4 +460,3 @@ int main() {
     liberar_alunos(alunos, n_alunos);
     return 0;
 }
-
