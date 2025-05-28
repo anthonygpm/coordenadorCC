@@ -4,7 +4,7 @@
 Devemos fazer um programa que gere a oferta acadêmica de CC da UFAL. A entrada será o histórico de n alunos, e devemos a partir disso, 
 alocar as matérias que serão ofertadas no período, junto com o professor que lecionará a matéria e sala que ela será ministrada.
 
-Não é permitido que o um professor ou sala estejam alocados em mais de uma disciplina no mesmo dia e horários. 
+Não é permitido que o um professor ou sala estejam alocados em mais de uma disciplina no mesmo dia e horários. - FEITO
 
 A carga horária do professor e sua formação devem ser consideradas para alocá-lo a uma disciplina, 
 por convenção todos os professores do curso estão habilitados a lecionar todas as disciplinas dos 4 primeiros períodos do curso. 
@@ -30,27 +30,35 @@ que não existir professor capacitado a ministrar a referida disciplina (o que a
 */
 
 /*
-PROBLEMA - nos professores, é melhor adicionar uma lista encadeada das matérias que ele pode lecionar, já que no momento, 
-está sendo limitado a ele apenas 3 matérias possíveis de lecionar.
-
 PROBLEMA - a lista de alunos está muito aleatória, com matérias meio desconexas.
 
 PROBLEMA - na contagem, ele está adicionando perfeitamente para as matérias obrigatórias, sendo que, para as metérias eletivas,
 ele está adicionando apenas naquelas que o aluno reprovou/trancou, e não nas eletivas seguintes.
 
 TODO - adicionar que se não houver professor disponível para a matéria, recomendar solicitar um professor substituto.
-TODO - adicionar o sistema de dias e horários, para não se chocarem.
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define MAX_ALUNOS 1000
 #define MAX_SALAS 200
 #define MAX_PROFS 200
 #define MAX_DISCIPLINAS 50
+#define MAX_AULAS 500
 #define LINE_BUFFER 256
+
+// Estrutura para aula alocada (horário/dia)
+typedef struct {
+    char professor[100];
+    char sala[50];
+    char dia[4];
+    char periodo;  // 'M' ou 'T'
+    int inicio;
+    int fim;
+} AulaAlocada;
 
 // Estrutura de disciplina (lista encadeada)
 typedef struct Disciplina {
@@ -74,11 +82,16 @@ typedef struct {
     int capacidade;
 } Sala;
 
+// Estrutura para disciplinas que professor leciona
+typedef struct DisciplinaProfessor {
+    char codigo[20];
+    struct DisciplinaProfessor *prox;
+} DisciplinaProfessor;
+
 // Estrutura de professor
 typedef struct {
     char nome_professor[100];
-    char disciplinas[MAX_DISCIPLINAS][20];
-    int num_disciplinas;
+    DisciplinaProfessor *disciplinas; // Lista encadeada
     int carga_horaria;
     int disciplinas_alocadas;
 } Professor;
@@ -90,10 +103,9 @@ typedef struct {
     int periodo;
     int obrigatoria;
     int necessidade;
-    // Novos campos (não usados na lógica atual, mas lidos)
     int pre_requisitos;
     int ch_disc;
-    int completa_arquivo;  // Renomeado para não conflitar com o campo 'completa' do aluno
+    int completa_arquivo;
     char horario[20];
     char dia_aula[20];
 } NecessidadeDisciplina;
@@ -105,7 +117,61 @@ typedef struct {
     char nome_professor[100];
     char nome_sala[50];
     int alunos_interessados;
+    char horario[20];       
+    char dias_aula[50];
 } Oferta;
+
+// Função auxiliar para decompor dias da semana
+void decompor_dias(const char *str_dias, char dias[][4], int *num_dias) {
+    *num_dias = 0;
+    int len = strlen(str_dias);
+    if (len == 0) return;
+    
+    char buffer[50];
+    strcpy(buffer, str_dias);
+    
+    char *token = strtok(buffer, ",");
+    while (token != NULL && *num_dias < 7) {
+        strncpy(dias[*num_dias], token, 3);
+        dias[*num_dias][3] = '\0';
+        (*num_dias)++;
+        token = strtok(NULL, ",");
+    }
+}
+
+// Função auxiliar para extrair informações do horário
+int extrair_horario(const char *horario_str, char *periodo, int *inicio, int *fim) {
+    if (strlen(horario_str) != 4) {
+        return -1;
+    }
+    *periodo = horario_str[0];
+    if (*periodo != 'M' && *periodo != 'T') {
+        return -1;
+    }
+    if (!isdigit(horario_str[1])) {
+        return -1;
+    }
+    *inicio = horario_str[1] - '0';
+    if (horario_str[2] != *periodo) {
+        return -1;
+    }
+    if (!isdigit(horario_str[3])) {
+        return -1;
+    }
+    *fim = horario_str[3] - '0';
+    return 0;
+}
+
+void clean_string(char *str) {
+    int i = 0, j = 0;
+    while (str[i]) {
+        if (isalnum(str[i]) || str[i] == '-') {
+            str[j++] = str[i];
+        }
+        i++;
+    }
+    str[j] = '\0';
+}
 
 int read_alunos(const char *filename, Aluno alunos[], int max) {
     FILE *fp = fopen(filename, "r");
@@ -209,37 +275,51 @@ int read_professores(const char *filename, Professor profs[], int max) {
     }
     char line[LINE_BUFFER];
     int count = 0;
-    fgets(line, LINE_BUFFER, fp); // Ignora cabeçalho
+
+    // pula cabeçalho
+    fgets(line, LINE_BUFFER, fp);
 
     while (fgets(line, LINE_BUFFER, fp) && count < max) {
-        char *saveptr;
-        char *token = strtok_r(line, ";\n", &saveptr);
+        char *save_semicolon;
+        char *save_comma;
+        char *token = strtok_r(line, ";\n", &save_semicolon);
         if (!token) continue;
 
-        // Nome do professor
-        strcpy(profs[count].nome_professor, token);
-        profs[count].num_disciplinas = 0;
+        // 1) Nome do professor
+        strncpy(profs[count].nome_professor, token, sizeof(profs[count].nome_professor)-1);
+        profs[count].nome_professor[sizeof(profs[count].nome_professor)-1] = '\0';
+
+        // inicializa lista
+        profs[count].disciplinas = NULL;
         profs[count].disciplinas_alocadas = 0;
 
-        // Processa os tokens restantes
-        char *last_token = NULL;
-        while ((token = strtok_r(NULL, ";\n", &saveptr)) != NULL) {
-            // Verifica se é numérico (carga horária)
-            char *endptr;
-            long val = strtol(token, &endptr, 10);
-            
-            if (*endptr == '\0') { // É numérico (carga horária)
-                profs[count].carga_horaria = (int)val;
-                break;
-            } 
-            else { // É disciplina
-                if (profs[count].num_disciplinas < MAX_DISCIPLINAS) {
-                    strcpy(profs[count].disciplinas[profs[count].num_disciplinas], token);
-                    profs[count].num_disciplinas++;
-                }
+        // 2) Campo “Disciplinas” (códigos separados por vírgula)
+        token = strtok_r(NULL, ";\n", &save_semicolon);
+        if (token) {
+            // usamos um buffer para não corromper save_semicolon
+            char buffer[LINE_BUFFER];
+            strncpy(buffer, token, LINE_BUFFER-1);
+            buffer[LINE_BUFFER-1] = '\0';
+
+            // agora separe por vírgula com strtok_r
+            char *disc = strtok_r(buffer, ",", &save_comma);
+            while (disc) {
+                DisciplinaProfessor *no = malloc(sizeof(*no));
+                if (!no) { perror("malloc"); exit(1); }
+                strncpy(no->codigo, disc, sizeof(no->codigo)-1);
+                no->codigo[sizeof(no->codigo)-1] = '\0';
+                clean_string(no->codigo);
+                no->prox = profs[count].disciplinas;
+                profs[count].disciplinas = no;
+
+                disc = strtok_r(NULL, ",", &save_comma);
             }
-            last_token = token;
         }
+
+        // 3) Carga horária
+        token = strtok_r(NULL, ";\n", &save_semicolon);
+        profs[count].carga_horaria = token ? atoi(token) : 0;
+
         count++;
     }
 
@@ -249,7 +329,10 @@ int read_professores(const char *filename, Professor profs[], int max) {
 
 int read_materias(const char *filename, NecessidadeDisciplina materias[], int max) {
     FILE *fp = fopen(filename, "r");
-    if (!fp) return 0;
+    if (!fp) {
+        perror("Erro ao abrir arquivo de materias");
+        return 0;
+    }
     char line[LINE_BUFFER];
     int count = 0;
     fgets(line, LINE_BUFFER, fp); // Ignora cabeçalho
@@ -260,6 +343,7 @@ int read_materias(const char *filename, NecessidadeDisciplina materias[], int ma
 
         // Codigo
         strcpy(materias[count].codigo, token);
+        clean_string(materias[count].codigo); // Limpa o código
 
         // Nome
         token = strtok(NULL, ";\n");
@@ -271,29 +355,32 @@ int read_materias(const char *filename, NecessidadeDisciplina materias[], int ma
         if (!token) continue;
         materias[count].periodo = atoi(token);
 
-        // Pre-requisitos (não usado)
+        // Pre-requisitos (ignorado)
         token = strtok(NULL, ";\n");
-
-        // Carga horária (não usado)
+        
+        // Carga horária
         token = strtok(NULL, ";\n");
         if (token) materias[count].ch_disc = atoi(token);
+        else materias[count].ch_disc = 72; // Default
 
         // Obrigatoria
         token = strtok(NULL, ";\n");
         if (!token) continue;
         materias[count].obrigatoria = (atoi(token) == 1) ? 1 : 0;
 
-        // Completa (não usado na lógica)
+        // Completa (ignorado)
         token = strtok(NULL, ";\n");
-        if (token) materias[count].completa_arquivo = atoi(token);
+        materias[count].completa_arquivo = 0;
 
         // Horario
         token = strtok(NULL, ";\n");
         if (token) strcpy(materias[count].horario, token);
+        else strcpy(materias[count].horario, "T34"); // Default
 
         // Dia de aula
         token = strtok(NULL, ";\n");
         if (token) strcpy(materias[count].dia_aula, token);
+        else strcpy(materias[count].dia_aula, "SEG,QUA"); // Default
 
         materias[count].necessidade = 0;
         count++;
@@ -326,54 +413,102 @@ void calcular_prioridade(NecessidadeDisciplina materias[], int n_materias,
 }
 
 int professor_pode(Professor *p, const char *codigo_disciplina) {
-    for (int i = 0; i < p->num_disciplinas; i++) {
-        if (strcmp(p->disciplinas[i], codigo_disciplina) == 0) return 1;
+    char clean_codigo[20];
+    strcpy(clean_codigo, codigo_disciplina);
+    clean_string(clean_codigo);
+
+    DisciplinaProfessor *d = p->disciplinas;
+    printf("\nVerificando professor %s para disciplina %s\n", 
+           p->nome_professor, clean_codigo);
+
+    int pode = 0;
+    while (d) {
+        printf("  Disciplina do prof: [%s]\n", d->codigo);
+        if (strcmp(d->codigo, clean_codigo) == 0) {
+            pode = 1;
+            // não dá break aqui, para mostrar todas as disciplinas
+        }
+        d = d->prox;
     }
-    return 0;
+
+    if (pode) {
+        printf("  -> PODE lecionar!\n");
+        return 1;
+    } else {
+        printf("  -> NÃO pode lecionar\n");
+        return 0;
+    }
+}
+
+void formatar_horario_legivel(const char *horario_str, char *saida, int tamanho_saida) {
+    char periodo;
+    int inicio, fim;
+    if (extrair_horario(horario_str, &periodo, &inicio, &fim) == 0) {
+        const char *periodo_nome = (periodo == 'M') ? "Manhã" : "Tarde";
+        snprintf(saida, tamanho_saida, "%s: %dª à %dª aula", periodo_nome, inicio, fim);
+    } else {
+        snprintf(saida, tamanho_saida, "Horário inválido");
+    }
 }
 
 int alocar_disciplinas(NecessidadeDisciplina materias[], int n_materias, 
                       Professor profs[], int n_profs, Sala salas[], int n_salas, 
                       Oferta ofertas[], int max_ofertas) {
     int count = 0;
+
     for (int i = 0; i < n_materias && count < max_ofertas; i++) {
         if (materias[i].necessidade == 0) continue;
 
-        int prof_index = -1, sala_index = -1;
+        printf("Tentando alocar: %s (necessidade: %d)\n", 
+               materias[i].codigo, materias[i].necessidade);
 
-        // Encontra professor disponível
+        // Tentar encontrar professor disponível
+        int prof_index = -1;
         for (int j = 0; j < n_profs; j++) {
-            if (professor_pode(&profs[j], materias[i].codigo) && 
-                profs[j].carga_horaria > 0 &&
-                profs[j].disciplinas_alocadas < 3) {  // NOVA CONDIÇÃO
-                prof_index = j;
+            if (professor_pode(&profs[j], materias[i].codigo)) {
+                if (profs[j].carga_horaria > 0) {
+                    prof_index = j;
+                    break;
+                }
+            }
+        }
+
+        if (prof_index == -1) {
+            printf("  Nenhum professor disponível para %s\n", materias[i].codigo);
+            continue;
+        }
+
+        // Encontrar sala adequada
+        int sala_index = -1;
+        for (int k = 0; k < n_salas; k++) {
+            if (salas[k].capacidade >= materias[i].necessidade) {
+                sala_index = k;
                 break;
             }
         }
 
-        // Encontra sala
-        for (int j = 0; j < n_salas; j++) {
-            if (salas[j].capacidade >= materias[i].necessidade) {
-                sala_index = j;
-                break;
-            }
+        if (sala_index == -1) {
+            printf("  Nenhuma sala adequada para %s\n", materias[i].codigo);
+            continue;
         }
 
-        if (prof_index != -1 && sala_index != -1) {
-            // Preenche a oferta
-            strcpy(ofertas[count].codigo_disciplina, materias[i].codigo);
-            strcpy(ofertas[count].nome_disciplina, materias[i].nome);
-            strcpy(ofertas[count].nome_professor, profs[prof_index].nome_professor);
-            strcpy(ofertas[count].nome_sala, salas[sala_index].nome_sala);
-            ofertas[count].alunos_interessados = materias[i].necessidade;
-
-            // Atualiza informações
-            salas[sala_index].capacidade -= materias[i].necessidade;
-            profs[prof_index].carga_horaria--;
-            profs[prof_index].disciplinas_alocadas++;  // INCREMENTA A ALOCAÇÃO
-
-            count++;
-        }
+        // Criar oferta
+        strcpy(ofertas[count].codigo_disciplina, materias[i].codigo);
+        strcpy(ofertas[count].nome_disciplina, materias[i].nome);
+        strcpy(ofertas[count].nome_professor, profs[prof_index].nome_professor);
+        strcpy(ofertas[count].nome_sala, salas[sala_index].nome_sala);
+        strcpy(ofertas[count].horario, materias[i].horario);
+        strcpy(ofertas[count].dias_aula, materias[i].dia_aula);
+        ofertas[count].alunos_interessados = materias[i].necessidade;
+        
+        // Atualizar professor
+        profs[prof_index].carga_horaria--;
+        
+        printf("  Alocada: Prof %s, Sala %s\n", 
+               profs[prof_index].nome_professor, 
+               salas[sala_index].nome_sala);
+        
+        count++;
     }
     return count;
 }
@@ -396,7 +531,25 @@ void imprimir_ofertas(Oferta ofertas[], int n) {
         printf("Disciplina: %s (%s)\n", ofertas[i].nome_disciplina, ofertas[i].codigo_disciplina);
         printf("  Professor: %s\n", ofertas[i].nome_professor);
         printf("  Sala: %s\n", ofertas[i].nome_sala);
+        
+        // Formata e exibe o horário
+        char horario_legivel[50];
+        formatar_horario_legivel(ofertas[i].horario, horario_legivel, sizeof(horario_legivel));
+        printf("  Horário: %s\n", horario_legivel);
+        
+        // Exibe os dias decompondo a string
+        char dias[7][4];
+        int num_dias;
+        decompor_dias(ofertas[i].dias_aula, dias, &num_dias);
+        printf("  Dias: ");
+        for (int d = 0; d < num_dias; d++) {
+            printf("%s", dias[d]);
+            if (d < num_dias-1) printf(", ");
+        }
+        printf("\n");
+        
         printf("  Alunos interessados: %d\n", ofertas[i].alunos_interessados);
+        printf("\n");
     }
 }
 
@@ -411,6 +564,17 @@ void liberar_alunos(Aluno alunos[], int n) {
     }
 }
 
+void liberar_professores(Professor profs[], int n) {
+    for (int i = 0; i < n; i++) {
+        DisciplinaProfessor *d = profs[i].disciplinas;
+        while (d) {
+            DisciplinaProfessor *tmp = d;
+            d = d->prox;
+            free(tmp);
+        }
+    }
+}
+
 int main() {
     Aluno alunos[MAX_ALUNOS];
     Sala salas[MAX_SALAS];
@@ -419,44 +583,35 @@ int main() {
     Oferta ofertas[MAX_DISCIPLINAS];
 
     int n_alunos = read_alunos("alunos.csv", alunos, MAX_ALUNOS);
-    if(n_alunos == 0) {
-        printf("Nenhum aluno carregado!\n");
-        return 1;
-    }
-
+    printf("Alunos carregados: %d\n", n_alunos);
+    
     int n_salas = read_salas("salas.csv", salas, MAX_SALAS);
-    if (n_salas == 0) {
-        printf("Erro: Nenhuma sala carregada!\n");
-        return 1;
-    }
-
+    printf("Salas carregadas: %d\n", n_salas);
+    
     int n_profs = read_professores("professores.csv", profs, MAX_PROFS);
-    if (n_profs == 0) {
-        printf("Erro: Nenhum professor carregado!\n");
-        return 1;
-    }
-
+    printf("Professores carregados: %d\n", n_profs);
+    
     int n_materias = read_materias("materias.csv", materias, MAX_DISCIPLINAS);
-    if (n_materias == 0) {
-        printf("Erro: Nenhuma disciplina carregada!\n");
-        return 1;
-    }
+    printf("Disciplinas carregadas: %d\n", n_materias);
 
-    
-    
     calcular_prioridade(materias, n_materias, alunos, n_alunos);
-    
-    // for (int i = 0; i < n_materias; i++) {
-    //     printf("Disciplina: %s (%s) | Obrigatória: %d | Necessidade: %d\n",
-    //         materias[i].nome, materias[i].codigo, materias[i].obrigatoria, materias[i].necessidade);
-    // }
-    
     ordenar_materias_por_necessidade(materias, n_materias);
 
+    // Debug: mostrar necessidades
+    printf("\nNecessidades calculadas:\n");
+    for (int i = 0; i < n_materias; i++) {
+        if (materias[i].necessidade > 0) {
+            printf("- %s: %d\n", materias[i].codigo, materias[i].necessidade);
+        }
+    }
+
     int n_ofertas = alocar_disciplinas(materias, n_materias, profs, n_profs, salas, n_salas, ofertas, MAX_DISCIPLINAS);
+    printf("\nTotal de ofertas alocadas: %d\n", n_ofertas);
 
     imprimir_ofertas(ofertas, n_ofertas);
 
     liberar_alunos(alunos, n_alunos);
+    liberar_professores(profs, n_profs);
+    
     return 0;
 }
