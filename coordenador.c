@@ -473,41 +473,80 @@ void formatar_horario_legivel(const char *horario_str, char *saida, int tamanho_
     }
 }
 
+int conflito(AulaAlocada *a, AulaAlocada *b) {
+    if (strcmp(a->dia, b->dia) != 0) return 0;
+    if (a->periodo != b->periodo) return 0;
+    if (a->inicio < b->fim && a->fim > b->inicio) {
+        return 1;
+    }
+    return 0;
+}
+
+// Função para verificar conflitos em uma sala
+int sem_conflito_sala(char *nome_sala, char dias[][4], int num_dias, char periodo, int inicio, int fim, AulaAlocada *aulas, int n_aulas) {
+    for (int d = 0; d < num_dias; d++) {
+        AulaAlocada tmp;
+        strcpy(tmp.sala, nome_sala);
+        strcpy(tmp.dia, dias[d]);
+        tmp.periodo = periodo;
+        tmp.inicio = inicio;
+        tmp.fim = fim;
+
+        for (int i = 0; i < n_aulas; i++) {
+            if (strcmp(aulas[i].sala, nome_sala) == 0) {
+                if (conflito(&aulas[i], &tmp)) {
+                    return 0;
+                }
+            }
+        }
+    }
+    return 1;
+}
+
 int alocar_disciplinas(NecessidadeDisciplina materias[], int n_materias, 
                       Professor profs[], int n_profs, Sala salas[], int n_salas, 
                       Oferta ofertas[], int max_ofertas) {
     int count = 0;
+    AulaAlocada aulas_alocadas[MAX_AULAS];
+    int n_aulas_alocadas = 0;
 
     for (int i = 0; i < n_materias && count < max_ofertas; i++) {
         if (materias[i].necessidade == 0) continue;
 
-        // printf("Tentando alocar: %s (necessidade: %d)\n", 
-        //        materias[i].codigo, materias[i].necessidade);
+        // Extrair horário da matéria
+        char periodo;
+        int inicio, fim;
+        if (extrair_horario(materias[i].horario, &periodo, &inicio, &fim) != 0) {
+            continue;
+        }
+
+        // Decompor dias da matéria
+        char dias[7][4];
+        int num_dias;
+        decompor_dias(materias[i].dia_aula, dias, &num_dias);
 
         // Tentar encontrar professor disponível
         int prof_index = -1;
         for (int j = 0; j < n_profs; j++) {
-            if (professor_pode(&profs[j], materias[i].codigo)) {
-                if (profs[j].carga_horaria > 0) {
-                    prof_index = j;
-                    break;
-                }
+            if (professor_pode(&profs[j], materias[i].codigo) && profs[j].carga_horaria > 0) {
+                prof_index = j;
+                break;
             }
         }
 
-        // Encontrar sala adequada
+        // Tentar encontrar sala sem conflito
         int sala_index = -1;
         for (int k = 0; k < n_salas; k++) {
-            if (salas[k].capacidade >= materias[i].necessidade) {
+            if (salas[k].capacidade < materias[i].necessidade) {
+                continue;
+            }
+            if (sem_conflito_sala(salas[k].nome_sala, dias, num_dias, periodo, inicio, fim, aulas_alocadas, n_aulas_alocadas)) {
                 sala_index = k;
                 break;
             }
         }
 
-        if (sala_index == -1) {
-            printf("  Nenhuma sala adequada para %s\n", materias[i].codigo);
-            continue;
-        }
+        if (sala_index == -1) continue;
 
         // Criar oferta
         strcpy(ofertas[count].codigo_disciplina, materias[i].codigo);
@@ -516,19 +555,22 @@ int alocar_disciplinas(NecessidadeDisciplina materias[], int n_materias,
             strcpy(ofertas[count].nome_professor, "Professor substituto");
         } else {
             strcpy(ofertas[count].nome_professor, profs[prof_index].nome_professor);
+            profs[prof_index].carga_horaria--;
         }
         strcpy(ofertas[count].nome_sala, salas[sala_index].nome_sala);
         strcpy(ofertas[count].horario, materias[i].horario);
         strcpy(ofertas[count].dias_aula, materias[i].dia_aula);
         ofertas[count].alunos_interessados = materias[i].necessidade;
-        
-        // Atualizar professor
-        profs[prof_index].carga_horaria--;
-        
-        // printf("  Alocada: Prof %s, Sala %s\n", 
-        //        profs[prof_index].nome_professor, 
-        //        salas[sala_index].nome_sala);
-        
+
+        // Registrar aulas alocadas
+        for (int d = 0; d < num_dias; d++) {
+            strcpy(aulas_alocadas[n_aulas_alocadas].sala, salas[sala_index].nome_sala);
+            strcpy(aulas_alocadas[n_aulas_alocadas].dia, dias[d]);
+            aulas_alocadas[n_aulas_alocadas].periodo = periodo;
+            aulas_alocadas[n_aulas_alocadas].inicio = inicio;
+            aulas_alocadas[n_aulas_alocadas].fim = fim;
+            n_aulas_alocadas++;
+        }
         count++;
     }
     return count;
