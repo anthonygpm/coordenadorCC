@@ -1,47 +1,47 @@
-codigo;nomeDisc;periodo;preRequisitos;chDisc;obrigatoria;completa;horario;diaDeAula
-COMP359;Programação 1;1;-999;72;1;0;T3T6;sex
-COMP360;Lógica para Computação;1;-999;72;1;0;T3T4;seg,qua
-COMP361;Computação, Sociedade e Ética;1;-999;72;1;0;T5T6;seg,qua
-COMP362;Matemática Discreta;1;-999;72;1;0;T1T2;ter,qui
-COMP363;Cálculo Diferencial e Integral;1;-999;144;1;0;T3T6;ter,qui
-COMP364;Estrutura de Dados;2;COMP359;72;1;0;M5M6;ter,qui
-COMP365;Banco de Dados;2;-999;72;1;0;T1T2;seg,qua
-COMP366;Organização e Arquitetura de Computadores;2;-999;72;1;0;M3M4;ter,qui
-COMP367;Geometria Analítica;2;-999;72;1;0;T3T4;seg,qua
-COMP368;Redes de Computadores;3;COMP359;72;1;0;T3T4;seg,qua
-COMP369;Teoria dos Grafos;3;COMP364COMP362;72;1;0;T1T2;seg,qui
-COMP370;Probabilidade e Estatística;3;COMP363;72;1;0;M5M6;seg,qua
-COMP371;Álgebra Linear;3;COMP367;72;1;0;M3M4;seg,qua
-COMP372;Programação 2;4;COMP364COMP365COMP368;72;1;0;T3T6;qua
-COMP373;Programação 3;4;COMP364COMP365COMP368;72;1;0;T3T4;ter,qui
-COMP374;Projeto e Análise de Algoritmos;4;COMP364COMP369;72;1;0;T5T6;seg,qui
-COMP376;Teoria da Computação;4;-999;72;1;0;T1T2;seg,qua
-COMP377;ACE 1 - Projeto 1;4;-999;75;1;0;T1T2;sex
-COMP378;Sistemas Operacionais;5;COMP366;72;1;0;T1T2;seg,qua
-COMP379;Compiladores;5;COMP364COMP376;72;1;0;T3T4;seg,qua
-COMP380;Inteligência Artificial;5;COMP360COMP364;72;1;0;T3T4;ter,qui
-COMP381;Computação Gráfica;5;-999;72;1;0;T5T6;ter,qui
-COMP383;ACE 2 - Continuidade do Projeto 1;5;-999;75;1;0;T2T3;sex
-COMP382;Projeto e Desenvolvimento de Sistemas;6;COMP378COMP379COMP380COMP381;144;1;0;M3M6;seg,qua
-COMP382;Projeto e Desenvolvimento de Sistemas;6;COMP378COMP379COMP380COMP381;144;1;0;M5M6;ter,qui
-COMP384;ACE 3 - Projeto 2;6;-999;75;1;0;T1T2;qui
-COMP386;Metodologia de Pesquisa e Trabalho Individual;7;-999;72;1;0;T1T2;ter,qui
-COMP387;Noções de Direito;7;-999;72;1;0;T3T6;ter
-COMP388;ACE 4 - Continuação do Projeto 2;7;-999;75;1;0;T1T3;seg
-COMP385;ACE 5 - Evento;8;-999;75;1;0;M2M3;sab
-COMP389;Conceitos de Linguagem de Programação;-999;-999;72;0;0;M1M2;ter,qui
-COMP404;Cálculo 3;-999;COMP363;72;0;0;T1T2;ter,qui
-COMP390;Aprendizagem de Máquina;-999;COMP404;72;0;0;T5T6;ter,qui
-COMP391;Sistemas Digitais;-999;COMP404;72;0;0;T3T4;ter,sex
-COMP392;Sistemas Distribuídos;-999;-999;72;0;0;M3M6;sex
-COMP393;Redes Neurais e Aprendizado Profundo;-999;-999;72;0;0;M5M6;ter,qui
-COMP343;FPGA;-999;COMP404;72;0;0;M2M3;ter,qua
-COMP395;Interação Humano-Computador;-999;COMP373;72;0;0;M3M4;seg,qua
-COMP399;Gerência de Projeto;-999;COMP382;72;0;0;M3M4;ter,qui
-COMP396;Processamento Digital de Imagens;-999;COMP381;72;0;0;M3M4;ter,qui
-COMP397;Computação Evolucionária;-999;-999;72;0;0;T3T4;ter,qui
-COMP398;Sistemas Embarcados;-999;-999;72;0;0;M5M6;ter,qui
-COMP400;Visão Computacional;-999;-999;72;0;0;M3M4;seg,qua
-COMP401;Ciência de Dados;-999;COMP370;72;0;0;T3T4;seg,qua
-COMP402;Microcontroladores e Aplicações;-999;-999;72;0;0;T1T2;seg,qua
-COMP403;Segurança de Sistemas Computacionais;-999;COMP368;72;0;0;T1T2;seg,qua
+codigo;nomeDisc;periodo;preRequisitos;chDisc;obrigatoria;completa;horario;diaDeAula;enfase
+COMP359;Programação 1;1;-999;72;1;0;T3T6;sex;0
+COMP360;Lógica para Computação;1;-999;72;1;0;T3T4;seg,qua;0
+COMP361;Computação, Sociedade e Ética;1;-999;72;1;0;T5T6;seg,qua;0
+COMP362;Matemática Discreta;1;-999;72;1;0;T1T2;ter,qui;0
+COMP363;Cálculo Diferencial e Integral;1;-999;144;1;0;T3T6;ter,qui;0
+COMP364;Estrutura de Dados;2;COMP359;72;1;0;M5M6;ter,qui;0
+COMP365;Banco de Dados;2;-999;72;1;0;T1T2;seg,qua;0
+COMP366;Organização e Arquitetura de Computadores;2;-999;72;1;0;M3M4;ter,qui;0
+COMP367;Geometria Analítica;2;-999;72;1;0;T3T4;seg,qua;0
+COMP368;Redes de Computadores;3;COMP359;72;1;0;T3T4;seg,qua;0
+COMP369;Teoria dos Grafos;3;COMP364COMP362;72;1;0;T1T2;seg,qui;0
+COMP370;Probabilidade e Estatística;3;COMP363;72;1;0;M5M6;seg,qua;0
+COMP371;Álgebra Linear;3;COMP367;72;1;0;M3M4;seg,qua;0
+COMP372;Programação 2;4;COMP364COMP365COMP368;72;1;0;T3T6;qua;0
+COMP373;Programação 3;4;COMP364COMP365COMP368;72;1;0;T3T4;ter,qui;0
+COMP374;Projeto e Análise de Algoritmos;4;COMP364COMP369;72;1;0;T5T6;seg,qui;0
+COMP376;Teoria da Computação;4;-999;72;1;0;T1T2;seg,qua;0
+COMP377;ACE 1 - Projeto 1;4;-999;75;1;0;T1T2;sex;0
+COMP378;Sistemas Operacionais;5;COMP366;72;1;0;T1T2;seg,qua;0
+COMP379;Compiladores;5;COMP364COMP376;72;1;0;T3T4;seg,qua;0
+COMP380;Inteligência Artificial;5;COMP360COMP364;72;1;0;T3T4;ter,qui;0
+COMP381;Computação Gráfica;5;-999;72;1;0;T5T6;ter,qui;0
+COMP383;ACE 2 - Continuidade do Projeto 1;5;-999;75;1;0;T2T3;sex;0
+COMP382;Projeto e Desenvolvimento de Sistemas;6;COMP378COMP379COMP380COMP381;144;1;0;M3M6;seg,qua;0
+COMP382;Projeto e Desenvolvimento de Sistemas;6;COMP378COMP379COMP380COMP381;144;1;0;M5M6;ter,qui;0
+COMP384;ACE 3 - Projeto 2;6;-999;75;1;0;T1T2;qui;0
+COMP386;Metodologia de Pesquisa e Trabalho Individual;7;-999;72;1;0;T1T2;ter,qui;0
+COMP387;Noções de Direito;7;-999;72;1;0;T3T6;ter;0
+COMP388;ACE 4 - Continuação do Projeto 2;7;-999;75;1;0;T1T3;seg;0
+COMP385;ACE 5 - Evento;8;-999;75;1;0;M2M3;sab;0
+COMP389;Conceitos de Linguagem de Programação;-999;-999;72;0;0;M1M2;ter,qui;4
+COMP404;Cálculo 3;-999;COMP363;72;0;0;T1T2;ter,qui;1,2,3
+COMP390;Aprendizagem de Máquina;-999;COMP404;72;0;0;T5T6;ter,qui;1,2
+COMP391;Sistemas Digitais;-999;COMP404;72;0;0;T3T4;ter,sex;3
+COMP392;Sistemas Distribuídos;-999;-999;72;0;0;M3M6;sex;4
+COMP393;Redes Neurais e Aprendizado Profundo;-999;-999;72;0;0;M5M6;ter,qui;1,2
+COMP343;FPGA;-999;COMP404;72;0;0;M2M3;ter,qua;3
+COMP395;Interação Humano-Computador;-999;COMP373;72;0;0;M3M4;seg,qua;4
+COMP399;Gerência de Projeto;-999;COMP382;72;0;0;M3M4;ter,qui;4
+COMP396;Processamento Digital de Imagens;-999;COMP381;72;0;0;M3M4;ter,qui;1
+COMP397;Computação Evolucionária;-999;-999;72;0;0;T3T4;ter,qui;2
+COMP398;Sistemas Embarcados;-999;-999;72;0;0;M5M6;ter,qui;3
+COMP400;Visão Computacional;-999;-999;72;0;0;M3M4;seg,qua;1
+COMP401;Ciência de Dados;-999;COMP370;72;0;0;T3T4;seg,qua;2
+COMP402;Microcontroladores e Aplicações;-999;-999;72;0;0;T1T2;seg,qua;3
+COMP403;Segurança de Sistemas Computacionais;-999;COMP368;72;0;0;T1T2;seg,qua;4
