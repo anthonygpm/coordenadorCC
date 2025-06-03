@@ -1,13 +1,13 @@
 nome_aluno;periodo;codigo_disciplina;nome_disciplina;media;enfase
 Ana Souza;3;COMP359;Programação 1;6.4;1
-Ana Souza;3;COMP360;Lógica para Computação;5.3;1
-Ana Souza;3;COMP361;Computação, Sociedade e Ética;8.3;1
-Ana Souza;3;COMP362;Matemática Discreta;6.4;1
-Ana Souza;3;COMP363;Cálculo Diferencial e Integral;7.8;1
-Ana Souza;3;COMP364;Estrutura de Dados;9.4;1
-Ana Souza;3;COMP365;Banco de Dados;-1;1
-Ana Souza;3;COMP366;Organização e Arquitetura de Computadores;9.0;1
-Ana Souza;3;COMP367;Geometria Analítica;7.4;1
+Ana Souza;3;COMP360;Lógica para Computação;5.3;0
+Ana Souza;3;COMP361;Computação, Sociedade e Ética;8.3;0
+Ana Souza;3;COMP362;Matemática Discreta;6.4;0
+Ana Souza;3;COMP363;Cálculo Diferencial e Integral;7.8;0
+Ana Souza;3;COMP364;Estrutura de Dados;9.4;0
+Ana Souza;3;COMP365;Banco de Dados;-1;0
+Ana Souza;3;COMP366;Organização e Arquitetura de Computadores;9.0;0
+Ana Souza;3;COMP367;Geometria Analítica;7.4;0
 André Ferreira;5;COMP366;Organização e Arquitetura de Computadores;6.7;3
 André Ferreira;5;COMP368;Redes de Computadores;7.4;0
 André Ferreira;5;COMP369;Teoria dos Grafos;6.0;0
@@ -207,3 +207,374 @@ Larissa Mendes;9;COMP389;ACE 6 - Continuação do Projeto 2;9.1;0
 Larissa Mendes;9;COMP399;Gerência de Projeto;7.9;0
 Larissa Mendes;9;COMP406;Tópicos Especiais em Computação;8.6;0
 Larissa Mendes;9;COMP407;Trabalho de Conclusão de Curso;8.8;0
+Rafael Oliveira;4;COMP359;Programação 1;8.2;3
+Rafael Oliveira;4;COMP360;Lógica para Computação;7.8;0
+Rafael Oliveira;4;COMP364;Estrutura de Dados;6.9;0
+Rafael Oliveira;4;COMP365;Banco de Dados;8.5;0
+Rafael Oliveira;4;COMP367;Geometria Analítica;7.1;0
+Rafael Oliveira;4;COMP372;Programação 2;9.0;0
+Sofia Rodrigues;2;COMP359;Programação 1;6.7;1
+Sofia Rodrigues;2;COMP362;Matemática Discreta;7.5;0
+Sofia Rodrigues;2;COMP363;Cálculo Diferencial e Integral;5.8;0
+Sofia Rodrigues;2;COMP366;Organização e Arquitetura de Computadores;8.3;0
+Sofia Rodrigues;2;COMP367;Geometria Analítica;6.2;0
+Pedro Henrique;5;COMP368;Redes de Computadores;7.9;4
+Pedro Henrique;5;COMP370;Probabilidade e Estatística;6.5;0
+Pedro Henrique;5;COMP378;Sistemas Operacionais;8.1;0
+Pedro Henrique;5;COMP380;Inteligência Artificial;7.3;0
+Pedro Henrique;5;COMP383;ACE 2 - Continuidade do Projeto 1;8.7;0
+Laura Costa;3;COMP361;Computação, Sociedade e Ética;9.2;2
+Laura Costa;3;COMP364;Estrutura de Dados;7.4;0
+Laura Costa;3;COMP365;Banco de Dados;6.8;0
+Laura Costa;3;COMP369;Teoria dos Grafos;8.0;0
+Laura Costa;3;COMP371;Álgebra Linear;7.6;0
+Guilherme Silva;6;COMP374;Projeto e Análise de Algoritmos;8.3;1
+Guilherme Silva;6;COMP382;Projeto e Desenvolvimento de Sistemas;9.1;0
+Guilherme Silva;6;COMP384;ACE 3 - Projeto 2;7.8;0
+Guilherme Silva;6;COMP399;Gerência de Projeto;8.5;0
+Guilherme Silva;6;COMP403;Segurança de Sistemas Computacionais;6.7;0
+Manuela Alves;1;COMP359;Programação 1;5.5;4
+Manuela Alves;1;COMP360;Lógica para Computação;6.9;0
+Manuela Alves;1;COMP361;Computação, Sociedade e Ética;7.2;0
+Manuela Alves;1;COMP362;Matemática Discreta;5.8;0
+Manuela Alves;1;COMP367;Geometria Analítica;6.4;0
+Enzo Pereira;7;COMP385;ACE 5 - Evento;8.9;3
+Enzo Pereira;7;COMP386;Metodologia de Pesquisa e Trabalho Individual;7.3;0
+Enzo Pereira;7;COMP388;ACE 4 - Continuação do Projeto 2;8.1;0
+Enzo Pereira;7;COMP399;Gerência de Projeto;6.8;0
+Enzo Pereira;7;COMP401;Ciência de Dados;9.0;0
+Valentina Santos;8;COMP384;ACE 3 - Projeto 2;8.4;2
+Valentina Santos;8;COMP385;ACE 5 - Evento;7.9;0
+Valentina Santos;8;COMP402;Processamento de Imagens;8.6;0
+Valentina Santos;8;COMP405;Tópicos Avançados em Computação;9.2;0
+Valentina Santos;8;COMP406;Tópicos Especiais em Computação;8.7;0
+Bruno Carvalho;3;COMP363;Cálculo Diferencial e Integral;6.1;1
+Bruno Carvalho;3;COMP364;Estrutura de Dados;5.9;0
+Bruno Carvalho;3;COMP366;Organização e Arquitetura de Computadores;7.5;0
+Bruno Carvalho;3;COMP367;Geometria Analítica;6.7;0
+Bruno Carvalho;3;COMP377;ACE 1 - Projeto 1;8.3;0
+Luiza Fernandes;9;COMP388;ACE 4 - Continuação do Projeto 2;9.3;4
+Luiza Fernandes;9;COMP389;Conceitos de Linguagem de Programação;8.8;0
+Luiza Fernandes;9;COMP399;Gerência de Projeto;7.7;0
+Luiza Fernandes;9;COMP407;Trabalho de Conclusão de Curso;9.5;0
+Ana Souza;3;COMP370;Probabilidade e Estatística;8.2;0
+Ana Souza;3;COMP371;Álgebra Linear;7.9;0
+André Ferreira;5;COMP370;Probabilidade e Estatística;6.7;0
+André Ferreira;5;COMP374;Projeto e Análise de Algoritmos;7.8;0
+Beatriz Ramos;2;COMP365;Banco de Dados;8.0;0
+Beatriz Ramos;2;COMP366;Organização e Arquitetura de Computadores;6.9;0
+Carlos Lima;6;COMP371;Álgebra Linear;8.4;0
+Carlos Lima;6;COMP374;Projeto e Análise de Algoritmos;7.1;0
+Diego Martins;6;COMP370;Probabilidade e Estatística;6.3;0
+Diego Martins;6;COMP371;Álgebra Linear;7.5;0
+Eduardo Silva;4;COMP370;Probabilidade e Estatística;8.1;0
+Eduardo Silva;4;COMP369;Teoria dos Grafos;6.8;0
+Lívia Martins;6;COMP370;Probabilidade e Estatística;7.9;0
+Lívia Martins;6;COMP374;Projeto e Análise de Algoritmos;8.4;0
+Matheus Cunha;6;COMP374;Projeto e Análise de Algoritmos;8.6;0
+Matheus Cunha;6;COMP382;Projeto e Desenvolvimento de Sistemas;7.3;0
+Daniel Ribeiro;1;COMP359;Programação 1;7.8;2
+Daniel Ribeiro;1;COMP360;Lógica para Computação;6.2;0
+Daniel Ribeiro;1;COMP361;Computação, Sociedade e Ética;8.5;0
+Daniel Ribeiro;1;COMP362;Matemática Discreta;5.9;0
+Daniel Ribeiro;1;COMP363;Cálculo Diferencial e Integral;6.7;0
+Daniel Ribeiro;1;COMP367;Geometria Analítica;7.1;0
+Carolina Viana;4;COMP364;Estrutura de Dados;8.3;1
+Carolina Viana;4;COMP365;Banco de Dados;7.6;0
+Carolina Viana;4;COMP366;Organização e Arquitetura de Computadores;6.9;0
+Carolina Viana;4;COMP367;Geometria Analítica;8.0;0
+Carolina Viana;4;COMP370;Probabilidade e Estatística;7.2;0
+Carolina Viana;4;COMP372;Programação 2;9.1;0
+Carolina Viana;4;COMP373;Programação 3;8.4;0
+Gustavo Neves;5;COMP368;Redes de Computadores;7.5;4
+Gustavo Neves;5;COMP369;Teoria dos Grafos;6.8;0
+Gustavo Neves;5;COMP370;Probabilidade e Estatística;8.1;0
+Gustavo Neves;5;COMP378;Sistemas Operacionais;6.3;0
+Gustavo Neves;5;COMP380;Inteligência Artificial;7.9;0
+Gustavo Neves;5;COMP383;ACE 2 - Continuidade do Projeto 1;8.0;0
+Helena Castro;3;COMP361;Computação, Sociedade e Ética;9.0;3
+Helena Castro;3;COMP364;Estrutura de Dados;7.7;0
+Helena Castro;3;COMP365;Banco de Dados;6.5;0
+Helena Castro;3;COMP366;Organização e Arquitetura de Computadores;8.2;0
+Helena Castro;3;COMP367;Geometria Analítica;7.4;0
+Marcos Rocha;6;COMP374;Projeto e Análise de Algoritmos;8.7;2
+Marcos Rocha;6;COMP382;Projeto e Desenvolvimento de Sistemas;7.8;0
+Marcos Rocha;6;COMP384;ACE 3 - Projeto 2;8.5;0
+Marcos Rocha;6;COMP399;Gerência de Projeto;6.9;0
+Marcos Rocha;6;COMP403;Segurança de Sistemas Computacionais;7.1;0
+Vitória Lima;2;COMP359;Programação 1;6.5;4
+Vitória Lima;2;COMP360;Lógica para Computação;5.8;0
+Vitória Lima;2;COMP361;Computação, Sociedade e Ética;7.3;0
+Vitória Lima;2;COMP362;Matemática Discreta;6.1;0
+Vitória Lima;2;COMP366;Organização e Arquitetura de Computadores;7.9;0
+Roberto Dias;7;COMP385;ACE 5 - Evento;8.3;1
+Roberto Dias;7;COMP386;Metodologia de Pesquisa e Trabalho Individual;7.0;0
+Roberto Dias;7;COMP388;ACE 4 - Continuação do Projeto 2;8.6;0
+Roberto Dias;7;COMP399;Gerência de Projeto;7.5;0
+Roberto Dias;7;COMP401;Ciência de Dados;8.8;0
+Fernando Almeida;8;COMP384;ACE 3 - Projeto 2;8.9;3
+Fernando Almeida;8;COMP385;ACE 5 - Evento;7.7;0
+Fernando Almeida;8;COMP402;Processamento de Imagens;8.2;0
+Fernando Almeida;8;COMP405;Tópicos Avançados em Computação;9.0;0
+Amanda Nunes;3;COMP363;Cálculo Diferencial e Integral;6.9;2
+Amanda Nunes;3;COMP364;Estrutura de Dados;7.2;0
+Amanda Nunes;3;COMP366;Organização e Arquitetura de Computadores;8.1;0
+Amanda Nunes;3;COMP367;Geometria Analítica;6.8;0
+Amanda Nunes;3;COMP377;ACE 1 - Projeto 1;8.4;0
+Leonardo Costa;9;COMP388;ACE 4 - Continuação do Projeto 2;9.1;4
+Leonardo Costa;9;COMP389;Conceitos de Linguagem de Programação;8.5;0
+Leonardo Costa;9;COMP399;Gerência de Projeto;7.8;0
+Leonardo Costa;9;COMP407;Trabalho de Conclusão de Curso;9.3;0
+Clara Martins;5;COMP368;Redes de Computadores;7.6;1
+Clara Martins;5;COMP370;Probabilidade e Estatística;6.9;0
+Clara Martins;5;COMP378;Sistemas Operacionais;8.2;0
+Clara Martins;5;COMP380;Inteligência Artificial;7.5;0
+Clara Martins;5;COMP383;ACE 2 - Continuidade do Projeto 1;8.1;0
+Thiago Oliveira;6;COMP374;Projeto e Análise de Algoritmos;8.0;3
+Thiago Oliveira;6;COMP382;Projeto e Desenvolvimento de Sistemas;7.9;0
+Thiago Oliveira;6;COMP384;ACE 3 - Projeto 2;7.5;0
+Thiago Oliveira;6;COMP399;Gerência de Projeto;6.7;0
+Yasmin Ferreira;1;COMP359;Programação 1;5.9;2
+Yasmin Ferreira;1;COMP360;Lógica para Computação;6.3;0
+Yasmin Ferreira;1;COMP361;Computação, Sociedade e Ética;7.8;0
+Yasmin Ferreira;1;COMP362;Matemática Discreta;5.7;0
+Yasmin Ferreira;1;COMP367;Geometria Analítica;6.4;0
+Rafaela Souza;7;COMP385;ACE 5 - Evento;8.7;4
+Rafaela Souza;7;COMP386;Metodologia de Pesquisa e Trabalho Individual;7.2;0
+Rafaela Souza;7;COMP388;ACE 4 - Continuação do Projeto 2;8.9;0
+Rafaela Souza;7;COMP399;Gerência de Projeto;7.1;0
+Cauê Santos;4;COMP364;Estrutura de Dados;7.9;1
+Cauê Santos;4;COMP365;Banco de Dados;6.7;0
+Cauê Santos;4;COMP366;Organização e Arquitetura de Computadores;8.3;0
+Cauê Santos;4;COMP367;Geometria Analítica;7.5;0
+Cauê Santos;4;COMP372;Programação 2;8.8;0
+Vanessa Oliveira;2;COMP359;Programação 1;7.2;3
+Vanessa Oliveira;2;COMP360;Lógica para Computação;6.8;0
+Vanessa Oliveira;2;COMP361;Computação, Sociedade e Ética;8.1;0
+Vanessa Oliveira;2;COMP362;Matemática Discreta;5.5;0
+Vanessa Oliveira;2;COMP366;Organização e Arquitetura de Computadores;7.4;0
+Rodrigo Silva;5;COMP368;Redes de Computadores;8.0;2
+Rodrigo Silva;5;COMP369;Teoria dos Grafos;7.1;0
+Rodrigo Silva;5;COMP370;Probabilidade e Estatística;6.9;0
+Rodrigo Silva;5;COMP378;Sistemas Operacionais;7.5;0
+Rodrigo Silva;5;COMP380;Inteligência Artificial;8.3;0
+Rodrigo Silva;5;COMP383;ACE 2 - Continuidade do Projeto 1;7.8;0
+Mariana Costa;3;COMP361;Computação, Sociedade e Ética;9.1;1
+Mariana Costa;3;COMP364;Estrutura de Dados;7.0;0
+Mariana Costa;3;COMP365;Banco de Dados;6.2;0
+Mariana Costa;3;COMP366;Organização e Arquitetura de Computadores;8.4;0
+Mariana Costa;3;COMP367;Geometria Analítica;7.3;0
+Felipe Santos;6;COMP374;Projeto e Análise de Algoritmos;8.5;4
+Felipe Santos;6;COMP382;Projeto e Desenvolvimento de Sistemas;7.9;0
+Felipe Santos;6;COMP384;ACE 3 - Projeto 2;8.2;0
+Felipe Santos;6;COMP399;Gerência de Projeto;7.0;0
+Felipe Santos;6;COMP403;Segurança de Sistemas Computacionais;7.6;0
+Letícia Fernandes;1;COMP359;Programação 1;6.0;2
+Letícia Fernandes;1;COMP360;Lógica para Computação;5.7;0
+Letícia Fernandes;1;COMP361;Computação, Sociedade e Ética;7.5;0
+Letícia Fernandes;1;COMP362;Matemática Discreta;6.2;0
+Letícia Fernandes;1;COMP367;Geometria Analítica;6.9;0
+Gabriel Rocha;7;COMP385;ACE 5 - Evento;8.8;1
+Gabriel Rocha;7;COMP386;Metodologia de Pesquisa e Trabalho Individual;7.1;0
+Gabriel Rocha;7;COMP388;ACE 4 - Continuação do Projeto 2;9.0;0
+Gabriel Rocha;7;COMP399;Gerência de Projeto;7.4;0
+Gabriel Rocha;7;COMP401;Ciência de Dados;8.5;0
+Isadora Alves;4;COMP364;Estrutura de Dados;8.1;3
+Isadora Alves;4;COMP365;Banco de Dados;7.3;0
+Isadora Alves;4;COMP366;Organização e Arquitetura de Computadores;7.8;0
+Isadora Alves;4;COMP367;Geometria Analítica;8.0;0
+Isadora Alves;4;COMP372;Programação 2;8.7;0
+Lucas Mendes;8;COMP384;ACE 3 - Projeto 2;9.1;4
+Lucas Mendes;8;COMP385;ACE 5 - Evento;8.3;0
+Lucas Mendes;8;COMP402;Processamento de Imagens;8.6;0
+Lucas Mendes;8;COMP405;Tópicos Avançados em Computação;9.2;0
+Júlia Pereira;3;COMP363;Cálculo Diferencial e Integral;7.0;2
+Júlia Pereira;3;COMP364;Estrutura de Dados;6.8;0
+Júlia Pereira;3;COMP366;Organização e Arquitetura de Computadores;7.5;0
+Júlia Pereira;3;COMP367;Geometria Analítica;6.9;0
+Júlia Pereira;3;COMP377;ACE 1 - Projeto 1;8.1;0
+Vinícius Lima;9;COMP388;ACE 4 - Continuação do Projeto 2;9.4;1
+Vinícius Lima;9;COMP389;Conceitos de Linguagem de Programação;8.7;0
+Vinícius Lima;9;COMP399;Gerência de Projeto;7.9;0
+Vinícius Lima;9;COMP407;Trabalho de Conclusão de Curso;9.6;0
+Patrícia Nunes;5;COMP368;Redes de Computadores;7.7;3
+Patrícia Nunes;5;COMP370;Probabilidade e Estatística;6.8;0
+Patrícia Nunes;5;COMP378;Sistemas Operacionais;8.0;0
+Patrícia Nunes;5;COMP380;Inteligência Artificial;7.4;0
+Patrícia Nunes;5;COMP383;ACE 2 - Continuidade do Projeto 1;8.2;0
+Raquel Dias;6;COMP374;Projeto e Análise de Algoritmos;8.4;2
+Raquel Dias;6;COMP382;Projeto e Desenvolvimento de Sistemas;7.6;0
+Raquel Dias;6;COMP384;ACE 3 - Projeto 2;7.9;0
+Raquel Dias;6;COMP399;Gerência de Projeto;6.8;0
+Bruno Martins;1;COMP359;Programação 1;5.8;4
+Bruno Martins;1;COMP360;Lógica para Computação;6.1;0
+Bruno Martins;1;COMP361;Computação, Sociedade e Ética;7.0;0
+Bruno Martins;1;COMP362;Matemática Discreta;5.9;0
+Bruno Martins;1;COMP367;Geometria Analítica;6.3;0
+Camila Rocha;7;COMP385;ACE 5 - Evento;8.5;1
+Camila Rocha;7;COMP386;Metodologia de Pesquisa e Trabalho Individual;7.3;0
+Camila Rocha;7;COMP388;ACE 4 - Continuação do Projeto 2;8.8;0
+Camila Rocha;7;COMP399;Gerência de Projeto;7.2;0
+Thiago Nascimento;4;COMP364;Estrutura de Dados;7.8;3
+Thiago Nascimento;4;COMP365;Banco de Dados;6.9;0
+Thiago Nascimento;4;COMP366;Organização e Arquitetura de Computadores;8.1;0
+Thiago Nascimento;4;COMP367;Geometria Analítica;7.7;0
+Thiago Nascimento;4;COMP372;Programação 2;8.3;0
+Laura Gomes;8;COMP384;ACE 3 - Projeto 2;8.9;2
+Laura Gomes;8;COMP385;ACE 5 - Evento;8.0;0
+Laura Gomes;8;COMP402;Processamento de Imagens;8.4;0
+Laura Gomes;8;COMP405;Tópicos Avançados em Computação;9.1;0
+Eduardo Rios;3;COMP363;Cálculo Diferencial e Integral;6.7;4
+Eduardo Rios;3;COMP364;Estrutura de Dados;7.1;0
+Eduardo Rios;3;COMP366;Organização e Arquitetura de Computadores;7.9;0
+Eduardo Rios;3;COMP367;Geometria Analítica;6.8;0
+Eduardo Rios;3;COMP377;ACE 1 - Projeto 1;8.0;0
+Natália Castro;9;COMP388;ACE 4 - Continuação do Projeto 2;9.2;3
+Natália Castro;9;COMP389;Conceitos de Linguagem de Programação;8.6;0
+Natália Castro;9;COMP399;Gerência de Projeto;7.8;0
+Natália Castro;9;COMP407;Trabalho de Conclusão de Curso;9.4;0
+Ricardo Almeida;5;COMP368;Redes de Computadores;7.9;1
+Ricardo Almeida;5;COMP370;Probabilidade e Estatística;6.7;0
+Ricardo Almeida;5;COMP378;Sistemas Operacionais;8.1;0
+Ricardo Almeida;5;COMP380;Inteligência Artificial;7.6;0
+Ricardo Almeida;5;COMP383;ACE 2 - Continuidade do Projeto 1;8.3;0
+Aline Souza;6;COMP374;Projeto e Análise de Algoritmos;8.2;2
+Aline Souza;6;COMP382;Projeto e Desenvolvimento de Sistemas;7.7;0
+Aline Souza;6;COMP384;ACE 3 - Projeto 2;8.0;0
+Aline Souza;6;COMP399;Gerência de Projeto;6.9;0
+João Vitor Martins;1;COMP359;Programação 1;6.5;3
+João Vitor Martins;1;COMP360;Lógica para Computação;5.8;0
+João Vitor Martins;1;COMP361;Computação, Sociedade e Ética;7.2;0
+João Vitor Martins;1;COMP362;Matemática Discreta;6.0;0
+João Vitor Martins;1;COMP367;Geometria Analítica;6.7;0
+Larissa Castro;4;COMP364;Estrutura de Dados;8.0;1
+Larissa Castro;4;COMP365;Banco de Dados;7.1;0
+Larissa Castro;4;COMP366;Organização e Arquitetura de Computadores;7.8;0
+Larissa Castro;4;COMP367;Geometria Analítica;8.2;0
+Larissa Castro;4;COMP372;Programação 2;8.9;0
+Larissa Castro;4;COMP373;Programação 3;7.5;0
+Pedro Lucas Alves;5;COMP368;Redes de Computadores;7.6;4
+Pedro Lucas Alves;5;COMP369;Teoria dos Grafos;6.9;0
+Pedro Lucas Alves;5;COMP370;Probabilidade e Estatística;7.3;0
+Pedro Lucas Alves;5;COMP378;Sistemas Operacionais;8.1;0
+Pedro Lucas Alves;5;COMP380;Inteligência Artificial;7.7;0
+Pedro Lucas Alves;5;COMP383;ACE 2 - Continuidade do Projeto 1;8.0;0
+Ana Clara Ribeiro;3;COMP361;Computação, Sociedade e Ética;8.8;2
+Ana Clara Ribeiro;3;COMP364;Estrutura de Dados;7.2;0
+Ana Clara Ribeiro;3;COMP365;Banco de Dados;6.5;0
+Ana Clara Ribeiro;3;COMP366;Organização e Arquitetura de Computadores;7.9;0
+Ana Clara Ribeiro;3;COMP367;Geometria Analítica;7.0;0
+Gabriel Henrique Lima;6;COMP374;Projeto e Análise de Algoritmos;8.6;3
+Gabriel Henrique Lima;6;COMP382;Projeto e Desenvolvimento de Sistemas;7.9;0
+Gabriel Henrique Lima;6;COMP384;ACE 3 - Projeto 2;8.3;0
+Gabriel Henrique Lima;6;COMP399;Gerência de Projeto;7.1;0
+Gabriel Henrique Lima;6;COMP403;Segurança de Sistemas Computacionais;7.8;0
+Maria Eduarda Ferreira;2;COMP359;Programação 1;6.8;1
+Maria Eduarda Ferreira;2;COMP360;Lógica para Computação;6.0;0
+Maria Eduarda Ferreira;2;COMP361;Computação, Sociedade e Ética;7.5;0
+Maria Eduarda Ferreira;2;COMP362;Matemática Discreta;5.9;0
+Maria Eduarda Ferreira;2;COMP366;Organização e Arquitetura de Computadores;7.7;0
+Carlos Eduardo Rocha;7;COMP385;ACE 5 - Evento;8.7;4
+Carlos Eduardo Rocha;7;COMP386;Metodologia de Pesquisa e Trabalho Individual;7.2;0
+Carlos Eduardo Rocha;7;COMP388;ACE 4 - Continuação do Projeto 2;8.9;0
+Carlos Eduardo Rocha;7;COMP399;Gerência de Projeto;7.4;0
+Carlos Eduardo Rocha;7;COMP401;Ciência de Dados;8.6;0
+Juliana Oliveira;8;COMP384;ACE 3 - Projeto 2;9.0;2
+Juliana Oliveira;8;COMP385;ACE 5 - Evento;8.2;0
+Juliana Oliveira;8;COMP402;Processamento de Imagens;8.5;0
+Rafael Santos;3;COMP363;Cálculo Diferencial e Integral;7.1;1
+Rafael Santos;3;COMP364;Estrutura de Dados;6.9;0
+Rafael Santos;3;COMP366;Organização e Arquitetura de Computadores;8.0;0
+Rafael Santos;3;COMP367;Geometria Analítica;7.2;0
+Rafael Santos;3;COMP377;ACE 1 - Projeto 1;8.3;0
+Amanda Costa;9;COMP388;ACE 4 - Continuação do Projeto 2;9.3;3
+Amanda Costa;9;COMP389;Conceitos de Linguagem de Programação;8.7;0
+Amanda Costa;9;COMP399;Gerência de Projeto;7.9;0
+Lucas Gabriel Souza;5;COMP368;Redes de Computadores;7.8;2
+Lucas Gabriel Souza;5;COMP370;Probabilidade e Estatística;6.8;0
+Lucas Gabriel Souza;5;COMP378;Sistemas Operacionais;8.2;0
+Lucas Gabriel Souza;5;COMP380;Inteligência Artificial;7.6;0
+Lucas Gabriel Souza;5;COMP383;ACE 2 - Continuidade do Projeto 1;8.1;0
+Isabelly Martins;6;COMP374;Projeto e Análise de Algoritmos;8.4;4
+Isabelly Martins;6;COMP382;Projeto e Desenvolvimento de Sistemas;7.7;0
+Isabelly Martins;6;COMP384;ACE 3 - Projeto 2;8.0;0
+Isabelly Martins;6;COMP399;Gerência de Projeto;6.9;0
+Bruno Henrique Almeida;1;COMP359;Programação 1;5.9;1
+Bruno Henrique Almeida;1;COMP360;Lógica para Computação;6.2;0
+Bruno Henrique Almeida;1;COMP361;Computação, Sociedade e Ética;7.1;0
+Bruno Henrique Almeida;1;COMP362;Matemática Discreta;5.8;0
+Bruno Henrique Almeida;1;COMP367;Geometria Analítica;6.5;0
+Fernanda Oliveira;7;COMP385;ACE 5 - Evento;8.6;2
+Fernanda Oliveira;7;COMP386;Metodologia de Pesquisa e Trabalho Individual;7.3;0
+Fernanda Oliveira;7;COMP388;ACE 4 - Continuação do Projeto 2;8.8;0
+Fernanda Oliveira;7;COMP399;Gerência de Projeto;7.2;0
+Thiago Silva;4;COMP364;Estrutura de Dados;7.9;3
+Thiago Silva;4;COMP365;Banco de Dados;6.8;0
+Thiago Silva;4;COMP366;Organização e Arquitetura de Computadores;8.1;0
+Thiago Silva;4;COMP367;Geometria Analítica;7.6;0
+Thiago Silva;4;COMP372;Programação 2;8.4;0
+Laura Beatriz Nunes;8;COMP384;ACE 3 - Projeto 2;8.8;1
+Laura Beatriz Nunes;8;COMP385;ACE 5 - Evento;8.1;0
+Laura Beatriz Nunes;8;COMP402;Processamento de Imagens;8.3;0
+Marcos Vinícius Lima;3;COMP363;Cálculo Diferencial e Integral;6.8;4
+Marcos Vinícius Lima;3;COMP364;Estrutura de Dados;7.0;0
+Marcos Vinícius Lima;3;COMP366;Organização e Arquitetura de Computadores;7.8;0
+Marcos Vinícius Lima;3;COMP367;Geometria Analítica;6.9;0
+Marcos Vinícius Lima;3;COMP377;ACE 1 - Projeto 1;8.2;0
+Natália Fernandes;9;COMP388;ACE 4 - Continuação do Projeto 2;9.2;2
+Natália Fernandes;9;COMP389;Conceitos de Linguagem de Programação;8.5;0
+Natália Fernandes;9;COMP399;Gerência de Projeto;7.8;0
+Gustavo Pereira;5;COMP368;Redes de Computadores;7.7;3
+Gustavo Pereira;5;COMP370;Probabilidade e Estatística;6.9;0
+Gustavo Pereira;5;COMP378;Sistemas Operacionais;8.0;0
+Gustavo Pereira;5;COMP380;Inteligência Artificial;7.5;0
+Gustavo Pereira;5;COMP383;ACE 2 - Continuidade do Projeto 1;8.2;0
+Beatriz Santos;6;COMP374;Projeto e Análise de Algoritmos;8.3;1
+Beatriz Santos;6;COMP382;Projeto e Desenvolvimento de Sistemas;7.6;0
+Beatriz Santos;6;COMP384;ACE 3 - Projeto 2;7.9;0
+Beatriz Santos;6;COMP399;Gerência de Projeto;6.8;0
+Vinicius Rodrigues;1;COMP359;Programação 1;6.1;2
+Vinicius Rodrigues;1;COMP360;Lógica para Computação;5.9;0
+Vinicius Rodrigues;1;COMP361;Computação, Sociedade e Ética;7.3;0
+Vinicius Rodrigues;1;COMP362;Matemática Discreta;6.0;0
+Vinicius Rodrigues;1;COMP367;Geometria Analítica;6.6;0
+Carolina Duarte;7;COMP385;ACE 5 - Evento;8.5;4
+Carolina Duarte;7;COMP386;Metodologia de Pesquisa e Trabalho Individual;7.1;0
+Carolina Duarte;7;COMP388;ACE 4 - Continuação do Projeto 2;8.7;0
+Carolina Duarte;7;COMP399;Gerência de Projeto;7.3;0
+Diego Almeida;4;COMP364;Estrutura de Dados;7.7;1
+Diego Almeida;4;COMP365;Banco de Dados;6.9;0
+Diego Almeida;4;COMP366;Organização e Arquitetura de Computadores;8.0;0
+Diego Almeida;4;COMP367;Geometria Analítica;7.5;0
+Diego Almeida;4;COMP372;Programação 2;8.2;0
+Luana Costa;8;COMP384;ACE 3 - Projeto 2;8.9;3
+Luana Costa;8;COMP385;ACE 5 - Evento;8.0;0
+Luana Costa;8;COMP402;Processamento de Imagens;8.4;0
+Roberto Ferreira;3;COMP363;Cálculo Diferencial e Integral;6.9;2
+Roberto Ferreira;3;COMP364;Estrutura de Dados;7.1;0
+Roberto Ferreira;3;COMP366;Organização e Arquitetura de Computadores;7.9;0
+Roberto Ferreira;3;COMP367;Geometria Analítica;6.8;0
+Roberto Ferreira;3;COMP377;ACE 1 - Projeto 1;8.1;0
+Tatiane Souza;9;COMP388;ACE 4 - Continuação do Projeto 2;9.1;1
+Tatiane Souza;9;COMP389;Conceitos de Linguagem de Programação;8.4;0
+Tatiane Souza;9;COMP399;Gerência de Projeto;7.7;0
+Leonardo Martins;5;COMP368;Redes de Computadores;7.8;4
+Leonardo Martins;5;COMP370;Probabilidade e Estatística;6.7;0
+Leonardo Martins;5;COMP378;Sistemas Operacionais;8.1;0
+Leonardo Martins;5;COMP380;Inteligência Artificial;7.6;0
+Leonardo Martins;5;COMP383;ACE 2 - Continuidade do Projeto 1;8.3;0
+Aline Barbosa;6;COMP374;Projeto e Análise de Algoritmos;8.2;2
+Aline Barbosa;6;COMP382;Projeto e Desenvolvimento de Sistemas;7.7;0
+Aline Barbosa;6;COMP384;ACE 3 - Projeto 2;8.0;0
+Aline Barbosa;6;COMP399;Gerência de Projeto;6.9;0
+Marcela Andrade;4;COMP364;Estrutura de Dados;8.2;1
+Marcela Andrade;4;COMP365;Banco de Dados;7.5;0
+Marcela Andrade;4;COMP366;Organização e Arquitetura de Computadores;8.0;0
+Marcela Andrade;4;COMP367;Geometria Analítica;7.8;0
+Marcela Andrade;4;COMP372;Programação 2;9.1;0
+Marcela Andrade;4;COMP373;Programação 3;8.5;0
+Ricardo Moura;7;COMP385;ACE 5 - Evento;8.9;3
+Ricardo Moura;7;COMP386;Metodologia de Pesquisa e Trabalho Individual;7.4;0
+Ricardo Moura;7;COMP388;ACE 4 - Continuação do Projeto 2;9.2;0
+Ricardo Moura;7;COMP399;Gerência de Projeto;7.8;0
+Ricardo Moura;7;COMP402;Microcontroladores e Aplicações;8.5;0
