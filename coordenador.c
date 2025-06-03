@@ -454,10 +454,9 @@ int professor_pode(Professor *p, const char *codigo_disciplina) {
     }
 
     if (pode) {
-        // printf("  -> PODE lecionar!\n");
+        p->disciplinas_alocadas++;
         return 1;
     } else {
-        // printf("  -> NÃO pode lecionar\n");
         return 0;
     }
 }
@@ -528,7 +527,7 @@ int alocar_disciplinas(NecessidadeDisciplina materias[], int n_materias,
         // Tentar encontrar professor disponível
         int prof_index = -1;
         for (int j = 0; j < n_profs; j++) {
-            if (professor_pode(&profs[j], materias[i].codigo) && profs[j].carga_horaria > 0) {
+            if (professor_pode(&profs[j], materias[i].codigo) && profs[j].disciplinas_alocadas <= 3) {
                 prof_index = j;
                 break;
             }
@@ -660,13 +659,13 @@ int main() {
     calcular_prioridade(materias, n_materias, alunos, n_alunos);
     ordenar_materias_por_necessidade(materias, n_materias);
 
-    // Debug: mostrar necessidades
-    printf("\nNecessidades calculadas:\n");
-    for (int i = 0; i < n_materias; i++) {
-        if (materias[i].necessidade > 0) {
-            printf("- %s: %d\n", materias[i].codigo, materias[i].necessidade);
-        }
-    }
+    // // Debug: mostrar necessidades
+    // printf("\nNecessidades calculadas:\n");
+    // for (int i = 0; i < n_materias; i++) {
+    //     if (materias[i].necessidade > 0) {
+    //         printf("- %s: %d\n", materias[i].codigo, materias[i].necessidade);
+    //     }
+    // }
 
     int n_ofertas = alocar_disciplinas(materias, n_materias, profs, n_profs, salas, n_salas, ofertas, MAX_DISCIPLINAS);
     printf("\nTotal de ofertas alocadas: %d\n", n_ofertas);
