@@ -29,10 +29,6 @@ que o número de alunos a serem matriculados na mesma é igual a 0;
 que não existir professor capacitado a ministrar a referida disciplina (o que acontece hoje em dia com a eletiva de FPGA);
 */
 
-/*
-PROBLEMA - só falta alterar os .csv
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -157,17 +153,6 @@ int extrair_horario(const char *horario_str, char *periodo, int *inicio, int *fi
     }
     *fim = horario_str[3] - '0';
     return 0;
-}
-
-void clean_string(char *str) {
-    int i = 0, j = 0;
-    while (str[i]) {
-        if (isalnum(str[i]) || str[i] == '-') {
-            str[j++] = str[i];
-        }
-        i++;
-    }
-    str[j] = '\0';
 }
 
 int read_alunos(const char *filename, Aluno alunos[], int max) {
@@ -308,7 +293,6 @@ int read_professores(const char *filename, Professor profs[], int max) {
                 if (!no) { perror("malloc"); exit(1); }
                 strncpy(no->codigo, disc, sizeof(no->codigo)-1);
                 no->codigo[sizeof(no->codigo)-1] = '\0';
-                clean_string(no->codigo);
                 no->prox = profs[count].disciplinas;
                 profs[count].disciplinas = no;
 
@@ -343,7 +327,6 @@ int read_materias(const char *filename, NecessidadeDisciplina materias[], int ma
 
         // Codigo
         strcpy(materias[count].codigo, token);
-        clean_string(materias[count].codigo); // Limpa o código
 
         // Nome
         token = strtok(NULL, ";\n");
@@ -433,20 +416,13 @@ void calcular_prioridade(NecessidadeDisciplina materias[], int n_materias,
     }
 }
 
-
 int professor_pode(Professor *p, const char *codigo_disciplina) {
-    char clean_codigo[20];
-    strcpy(clean_codigo, codigo_disciplina);
-    clean_string(clean_codigo);
 
     DisciplinaProfessor *d = p->disciplinas;
-    // printf("\nVerificando professor %s para disciplina %s\n", 
-    //        p->nome_professor, clean_codigo);
 
     int pode = 0;
     while (d) {
-        // printf("  Disciplina do prof: [%s]\n", d->codigo);
-        if (strcmp(d->codigo, clean_codigo) == 0) {
+        if (strcmp(d->codigo, codigo_disciplina) == 0) {
             pode = 1;
             // não dá break aqui, para mostrar todas as disciplinas
         }
@@ -575,21 +551,20 @@ int alocar_disciplinas(NecessidadeDisciplina materias[], int n_materias,
     return count;
 }
 
+int comparar_necessidade(const void *a, const void *b) {
+    const NecessidadeDisciplina *m1 = (const NecessidadeDisciplina *)a;
+    const NecessidadeDisciplina *m2 = (const NecessidadeDisciplina *)b;
+    return m2->necessidade - m1->necessidade; // Ordem decrescente
+}
+
 void ordenar_materias_por_necessidade(NecessidadeDisciplina materias[], int n) {
-    for (int i = 0; i < n-1; i++) {
-        for (int j = i+1; j < n; j++) {
-            if (materias[j].necessidade > materias[i].necessidade) {
-                NecessidadeDisciplina temp = materias[i];
-                materias[i] = materias[j];
-                materias[j] = temp;
-            }
-        }
-    }
+    qsort(materias, n, sizeof(NecessidadeDisciplina), comparar_necessidade);
 }
 
 void imprimir_ofertas(Oferta ofertas[], int n) {
     printf("\n--- Disciplinas Ofertadas no Semestre ---\n");
     for (int i = 0; i < n; i++) {
+        if (ofertas[i].alunos_interessados < 10) continue;
         printf("Disciplina: %s (%s)\n", ofertas[i].nome_disciplina, ofertas[i].codigo_disciplina);
         printf("  Professor: %s\n", ofertas[i].nome_professor);
         printf("  Sala: %s\n", ofertas[i].nome_sala);
@@ -658,14 +633,6 @@ int main() {
 
     calcular_prioridade(materias, n_materias, alunos, n_alunos);
     ordenar_materias_por_necessidade(materias, n_materias);
-
-    // // Debug: mostrar necessidades
-    // printf("\nNecessidades calculadas:\n");
-    // for (int i = 0; i < n_materias; i++) {
-    //     if (materias[i].necessidade > 0) {
-    //         printf("- %s: %d\n", materias[i].codigo, materias[i].necessidade);
-    //     }
-    // }
 
     int n_ofertas = alocar_disciplinas(materias, n_materias, profs, n_profs, salas, n_salas, ofertas, MAX_DISCIPLINAS);
     printf("\nTotal de ofertas alocadas: %d\n", n_ofertas);
