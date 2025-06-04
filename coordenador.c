@@ -19,7 +19,7 @@ As salas laboratórios devem ser alocadas preferencialmente para as disciplinas 
 
 // O professor deve ter um limite máximo de disciplina por semestre planejado, igual a: máximo 3; - FEITO
 // considere a possibilidade de solicitar um professor substituto para lecionar a disciplina; - FEITO
-// os professores deve ser alocados no menor números de dias possíveis
+// os professores deve ser alocados no menor números de dias possíveis - FEITO
 // as disciplinas obrigatórias devem ter maior prioridade - FEITO
 
 /*
@@ -428,13 +428,12 @@ int professor_pode(Professor *p, const char *codigo_disciplina) {
     while (d) {
         if (strcmp(d->codigo, codigo_disciplina) == 0) {
             pode = 1;
-            // não dá break aqui, para mostrar todas as disciplinas
+            // não dá break aqui, para listar todas as disciplinas
         }
         d = d->prox;
     }
 
     if (pode) {
-        p->disciplinas_alocadas++;
         return 1;
     } else {
         return 0;
@@ -507,8 +506,9 @@ int alocar_disciplinas(NecessidadeDisciplina materias[], int n_materias,
         // Tentar encontrar professor disponível
         int prof_index = -1;
         for (int j = 0; j < n_profs; j++) {
-            if (professor_pode(&profs[j], materias[i].codigo) && profs[j].disciplinas_alocadas <= 1) {
+            if (professor_pode(&profs[j], materias[i].codigo) && profs[j].disciplinas_alocadas == 0) {
                 prof_index = j;
+                profs[j].disciplinas_alocadas++;
                 break;
             }
         }
