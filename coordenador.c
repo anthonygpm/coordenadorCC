@@ -94,7 +94,7 @@ typedef struct {
     char nome[100];
     int periodo;
     int obrigatoria;
-    int necessidade;
+    double necessidade;
     int pre_requisitos;
     int ch_disc;
     int completa_arquivo;
@@ -109,7 +109,7 @@ typedef struct {
     char nome_disciplina[100];
     char nome_professor[100];
     char nome_sala[50];
-    int alunos_interessados;
+    double nivel_interesse;
     char horario[20];       
     char dias_aula[50];
 } Oferta;
@@ -387,9 +387,9 @@ void calcular_prioridade(NecessidadeDisciplina materias[], int n_materias,
                     if (strcmp(materias[j].codigo, d->codigo_disciplina) == 0 &&
                         materias[j].periodo <= alunos[i].periodo) { // Usa o período da disciplina 
                         if (materias[j].obrigatoria == 1) {
-                            materias[j].necessidade += 2; // peso 2 para disciplina obrigatória
+                            materias[j].necessidade += 3; // peso 3 para disciplina obrigatória
                         } else {
-                            materias[j].necessidade++; // peso 1 para disciplina eletiva
+                            materias[j].necessidade += 0.5; // peso 0.5 para disciplina eletiva
                         }
                         break;
                     }
@@ -405,8 +405,12 @@ void calcular_prioridade(NecessidadeDisciplina materias[], int n_materias,
             for (int j = 0; j < n_materias; j++) {
                 if (strcmp(materias[j].enfase, "0") != 0) { // matéria tem ênfase específica
                     for (int c = 0; c < 5; c += 2) {
-                        if (materias[j].enfase[c] == alunos[i].enfase) {
-                            materias[j].necessidade += 1;
+                        int k;
+                        for (k = 0; k <= MAX_DISCIPLINAS; k++) {
+                            if (strcmp(materias[j].codigo, alunos[i].disciplinas_cursadas[k].codigo_disciplina) == 0) break;
+                        }
+                        if (materias[j].enfase[c] == alunos[i].enfase && alunos[i].disciplinas_cursadas[k].completa != 1) {
+                            materias[j].necessidade += 0.5;
                             break;
                         }
                     }
@@ -521,8 +525,6 @@ int alocar_disciplinas(NecessidadeDisciplina materias[], int n_materias,
             }
         }
 
-        if (sala_index == -1) continue;
-
         // Criar oferta
         strcpy(ofertas[count].codigo_disciplina, materias[i].codigo);
         strcpy(ofertas[count].nome_disciplina, materias[i].nome);
@@ -530,12 +532,15 @@ int alocar_disciplinas(NecessidadeDisciplina materias[], int n_materias,
             strcpy(ofertas[count].nome_professor, "Professor substituto");
         } else {
             strcpy(ofertas[count].nome_professor, profs[prof_index].nome_professor);
-            profs[prof_index].carga_horaria--;
         }
-        strcpy(ofertas[count].nome_sala, salas[sala_index].nome_sala);
+        if (sala_index == -1) {
+            strcpy(ofertas[count].nome_sala, "A matéria deverá ser dividida entre duas salas");
+        } else {
+            strcpy(ofertas[count].nome_sala, salas[sala_index].nome_sala);
+        }
         strcpy(ofertas[count].horario, materias[i].horario);
         strcpy(ofertas[count].dias_aula, materias[i].dia_aula);
-        ofertas[count].alunos_interessados = materias[i].necessidade;
+        ofertas[count].nivel_interesse = materias[i].necessidade;
 
         // Registrar aulas alocadas
         for (int d = 0; d < num_dias; d++) {
@@ -564,7 +569,7 @@ void ordenar_materias_por_necessidade(NecessidadeDisciplina materias[], int n) {
 void imprimir_ofertas(Oferta ofertas[], int n) {
     printf("\n--- Disciplinas Ofertadas no Semestre ---\n");
     for (int i = 0; i < n; i++) {
-        if (ofertas[i].alunos_interessados < 10) continue;
+        if (ofertas[i].nivel_interesse < 10) continue;
         printf("Disciplina: %s (%s)\n", ofertas[i].nome_disciplina, ofertas[i].codigo_disciplina);
         printf("  Professor: %s\n", ofertas[i].nome_professor);
         printf("  Sala: %s\n", ofertas[i].nome_sala);
@@ -585,7 +590,7 @@ void imprimir_ofertas(Oferta ofertas[], int n) {
         }
         printf("\n");
         
-        printf("  Alunos interessados: %d\n", ofertas[i].alunos_interessados);
+        printf("  Nível de interesse: %.0f\n", ofertas[i].nivel_interesse);
         printf("\n");
     }
 }
