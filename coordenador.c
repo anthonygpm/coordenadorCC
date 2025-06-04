@@ -507,9 +507,19 @@ int alocar_disciplinas(NecessidadeDisciplina materias[], int n_materias,
         // Tentar encontrar professor disponível
         int prof_index = -1;
         for (int j = 0; j < n_profs; j++) {
-            if (professor_pode(&profs[j], materias[i].codigo) && profs[j].disciplinas_alocadas <= 3) {
+            if (professor_pode(&profs[j], materias[i].codigo) && profs[j].disciplinas_alocadas <= 1) {
                 prof_index = j;
                 break;
+            }
+        }
+        /* se der como resultado um professor substituto, ele procura um que já foi alocado em outra matéria, 
+        fazendo com que todos sejam obrigatoriamente alocados naquelas matérias que são capazes de lecionar e no menor número de dias possível */
+        if (prof_index == -1) {
+            for (int j = 0; j < n_profs; j++) {
+                if (professor_pode(&profs[j], materias[i].codigo) && profs[j].disciplinas_alocadas <= 3) {
+                    prof_index = j;
+                    break;
+                }
             }
         }
 
